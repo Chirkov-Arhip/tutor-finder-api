@@ -7,14 +7,14 @@ from src.db.models.user import User
 
 router = APIRouter()
 
-# — Вспомогательные функции —————————————————————————
+# Вспомогательные функции
 def hash_password(password: str) -> str:
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 def verify_password(password: str, hashed: str) -> bool:
     return bcrypt.checkpw(password.encode('utf-8'), hashed.encode('utf-8'))
 
-# — Схемы данных —————————————————————————————————————
+# Схемы данных
 class RegisterRequest(BaseModel):
     email: EmailStr
     password: str
@@ -32,7 +32,7 @@ class UserResponse(BaseModel):
     class Config:
         from_attributes = True
 
-# — Эндпоинты ————————————————————————————————————————
+# Эндпоинты
 @router.post("/register", response_model=UserResponse, status_code=201)
 def register(data: RegisterRequest, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == data.email).first()

@@ -177,7 +177,6 @@ if (logoutBtn) {
 }
 
 // Инициализация
-// Инициализация
 loadSubjectFilter();
 if (!document.getElementById('expMin')) {
     loadTutors();

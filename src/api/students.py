@@ -9,7 +9,7 @@ from src.db.models.application import Application
 
 router = APIRouter()
 
-# — Схемы данных —————————————————————————————————————
+# Схемы данных
 class StudentProfileRequest(BaseModel):
     user_id: int
     last_name: str
@@ -49,7 +49,7 @@ class ApplicationResponse(BaseModel):
     class Config:
         from_attributes = True
 
-# — Эндпоинты ————————————————————————————————————————
+# Эндпоинты
 @router.post("/profile", status_code=201)
 def create_profile(data: StudentProfileRequest, db: Session = Depends(get_db)):
     existing = db.query(StudentProfile).filter(

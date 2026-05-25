@@ -14,7 +14,6 @@ import os
 async def lifespan(app: FastAPI):
     # Применяем миграции Alembic автоматически
     alembic_cfg = Config("alembic.ini")
-    # На всякий случай задаём URL базы из настроек (если alembic.ini не содержит)
     from src.config import settings
     alembic_cfg.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
     command.upgrade(alembic_cfg, "head")
